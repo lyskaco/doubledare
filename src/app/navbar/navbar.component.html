@@ -1,0 +1,10 @@
+<nav class="main-nav" [ngClass]='{"hidden-animated":isOnAllowedPath()}'>
+	<h1 routerLink="/" [ngClass] = '{"opacityOn": isLogged }'></h1>
+	<ul>
+		
+		<li class="btn card1" *ngIf = 'isLogged' routerLink = 'dashboard'><i class="mdi mdi-home"></i></li>
+		<li class="btn card1" routerLink = 'how-it-works'>How it works ?</li>
+		<li class="btn card1" *ngIf = '!isLogged' routerLink="/login">Login</li>
+		<li class="btn card1" *ngIf = 'isLogged' (click)='logOut()'>Logout</li>
+	</ul>
+</nav>

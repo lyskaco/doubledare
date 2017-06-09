@@ -1,0 +1,148 @@
+<section class="single-room">
+	<article class="card2" *ngIf='eventData' ><!--  *ngIf='eventData' -->
+		<h1>Event</h1>
+		<div class="host-data card1">
+			<div class="host-image card2">
+				<img [src]='eventData.pictureHost'>
+			</div>
+			<div class="column">
+				<h3>Statement: {{eventData.statement}} </h3>
+				<h4 *ngIf='eventData.userName'>Host: {{eventData.userName}}</h4>
+				<h4 *ngIf='!eventData.userName'>Host: {{eventData.firstName}}</h4>
+				<p>ID: {{eventData.idRoom}} </p>
+			</div>
+			<div class="triangle-label" *ngIf='eventData.VIP==="1"'>
+				<i class="mdi mdi-star" mdTooltip='Our crew pick'></i>
+			</div>
+		</div>
+		<div class="event-data ">
+			<div class="column  card1 time">
+				<p><span>Creation date:</span> {{eventData.timeStamp | date:'medium'}}</p>
+				<p><span>Event end time:</span> {{eventData.endTime | date:'medium'}}</p>
+				<p><span>Bet close:</span> {{eventData.endBetTime | date:'medium'}}</p>
+				<p><span>Status: </span>
+				<span *ngIf='eventData.status==="pending"'>OPEN</span>
+				<span *ngIf='eventData.status==="Waiting_For_Confirmation"'>JUDGING</span>
+				<span *ngIf='eventData.status==="finished"'>FINISHED</span>
+				<span *ngIf='eventData.status === "rejected"'>REJECTED ({{eventData.rejectDescription}})</span>
+				</p>
+			</div>
+			<div class="wrapper">
+				<div class="column point card1">
+					<p>TOTAL:</p>
+					<h2>{{eventData.allPoints}}</h2>
+				</div>
+				<div class="column point card1">
+					<p>BID:</p>
+					<h2>{{eventData.roomPoint}}</h2>
+				</div>
+
+			</div>
+				
+		</div>
+		<div class="status-panel">
+			<div class="closed" *ngIf='eventData.status==="closed"'>
+				<h3>This bet is closed<i class="mdi mdi-comment-alert"></i></h3>
+			</div>
+			<div class="host-panel-wtf" *ngIf='isModerator && eventData.status==="Waiting_For_Confirmation"'>
+				<h3>Hello {{userSession.userName}}, bet time has passed.</h3>
+				<h4>Decide which side won:</h4>
+				<div class="choice-container">
+					<button md-raised-button [disabled] = 'hostActionPerformed' (click)='hostDecideSide(1)'>POSITIVE</button>
+					<button md-raised-button [disabled] = 'hostActionPerformed' (click)='hostDecideSide(0)'>NEGATIVE</button>
+				</div>
+			</div>
+			<div class="wtf card1" *ngIf='eventData.status==="Waiting_For_Confirmation"'>
+				<h3>This event is waiting for judge to choose the winning side. <i class="mdi mdi-comment-alert"></i></h3>
+			</div>
+			<div class="finished" *ngIf='eventData.status==="finished"'>
+				<h3 *ngIf='eventData.winSide === "0"'>
+						NEGATIVE WON <i class="mdi mdi-crown"></i>
+				</h3>
+				<h3 *ngIf='eventData.winSide === "1"'>
+						POSITIVE WON <i class="mdi mdi-crown"></i>
+				</h3>
+			</div>
+		</div>
+		<div class="message-output">
+			<h3>{{afterJoinMessageError}}</h3>
+		</div>
+		<div class="side-choice-mobile">
+			<button md-button [disabled]='!userSession.userName || eventData.status!=="pending"' *ngIf="!isParticipating && !isModerator" (click) = 'joinEvent(1)' ><md-icon class='mdi mdi-thumb-up'></md-icon></button>
+			<button md-button [disabled]='!userSession.userName || eventData.status!=="pending"' *ngIf="!isParticipating && !isModerator" (click) = 'joinEvent(0)' ><md-icon class='mdi mdi-thumb-down'></md-icon></button>
+		</div>
+		<div class="participants-mobile">
+		<h2>PARTICIPANTS</h2>
+			<div class="tabs">
+				<button md-button [ngClass]='{"highlighted":toggleParticipantSide==="positive"}' (click)='toggleParticipantSide="positive"'><md-icon class='mdi mdi-thumb-up'></md-icon>{{eventData.participantsNumberPositive}}</button>
+				<button md-button [ngClass]='{"highlighted":toggleParticipantSide==="negative"}' (click)='toggleParticipantSide="negative"'><md-icon class='mdi mdi-thumb-down'></md-icon>{{eventData.participantsNumberNegative}}</button>
+			</div>
+			<div class="participants-positive" *ngIf='toggleParticipantSide==="positive"'>
+				<div class="participant" *ngFor='let item of eventData.participantDataPostive'>
+					<div class="participant-image card1">
+						<img [src]='item.participantPicture'>
+					</div>
+					<div>
+						<h3>{{item.participantUsername}}</h3>
+						<p>Added: {{item.timeStamp}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="participants-negative" *ngIf='toggleParticipantSide==="negative"'>
+				<div class="participant" *ngFor='let item of eventData.participantDataNegative'>
+					<div class="participant-image card1">
+						<img [src]='item.participantPicture'>
+					</div>
+					<div>
+						<h3>{{item.participantUsername}}</h3>
+						<p>Added: {{item.timeStamp}}</p>
+					</div>
+			</div>
+		</div>
+		</div>
+		<div class="participants">
+			<div class="participants-positive card1">
+				<h2 class="card1">I am positive</h2>
+				<div class="content">
+					<div class="participant" *ngFor='let item of eventData.participantDataPostive'>
+					<div class="participant-image card1">
+						<img [src]='item.participantPicture'>
+					</div>
+					<div>
+						<h3>{{item.participantUsername}}</h3>
+						<p>Added: {{item.timeStamp}}</p>
+					</div>
+					</div>
+				</div>
+				
+				<div class="actionBar">
+					<button [disabled]='!userSession.userName || eventData.status!=="pending"' *ngIf="!isParticipating && !isModerator" (click)='joinEvent(1)' md-icon-button class="card1"><md-icon class='mdi mdi-thumb-up'></md-icon></button>
+					<h3 *ngIf='eventData.winSide === "1"'>
+						WINNER<i class="mdi mdi-crown"></i>
+					</h3>
+				</div>
+			</div>
+			<div class="participants-negative card1">
+				<h2 class="card1">I am negative</h2>
+				<div class="content">
+					<div class="participant" *ngFor='let item of eventData.participantDataNegative'>
+						<div class="participant-image card1">
+							<img [src]='item.participantPicture'>
+						</div>
+						<div>
+							<h3>{{item.participantUsername}}</h3>
+							<p>Added: {{item.timeStamp}}</p>
+						</div>
+						</div>
+				</div>
+				
+				<div class="actionBar">
+					<button class="card2" [disabled]='!userSession.userName || eventData.status!=="pending"' *ngIf="!isParticipating && !isModerator" (click) = 'joinEvent(0)' md-icon-button class="card1"><md-icon class='mdi mdi-thumb-down'></md-icon></button>
+					<h3 *ngIf='eventData.winSide === "0"'>
+						WINNER <i class="mdi mdi-crown"></i>
+					</h3>
+				</div>
+			</div>
+		</div>
+	</article>
+</section>

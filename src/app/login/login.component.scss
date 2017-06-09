@@ -1,0 +1,137 @@
+@import '../../styles';
+.login-section {
+	height: 100vh;
+	// overflow-x: hidden;
+	// overflow-y: scroll;
+	width: 100%;
+	//background-image: linear-gradient(90deg, #AAFFA9, #11FFBD);
+	background-image: linear-gradient(90deg, rgba(170, 255, 169, 0.8), rgba(17, 255, 189, 0.9));
+	font-family: Montserrat;
+	display : flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	.layer-image {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+	top: 0;
+	background-image: url('../../assets/building.jpg');
+	background-size: cover;
+	background-position: 45% 50%;
+	background-repeat: no-repeat;
+	//background-size: cover;
+	z-index: -1;
+	}
+	.login-container {
+		width: 27vw;
+		background-color: $primary-light;
+		text-align: center;
+		animation: loginSlide 0.8s ease;
+		@keyframes loginSlide {
+			0% {
+				transform: translateY(-50%);
+			}
+		}
+		.thinkingSpinner {
+			md-spinner {
+				height: 40px;
+				width: 40px;
+			}
+		}
+		span {
+			font-family: Cardo;
+			font-weight: 800;
+			color: $font-primary;
+		}
+		p {
+			font-family: Cardo;
+			margin: 10px 0;
+			font-style: italic;
+			font-weight: 800;
+			font-size: 16px;
+			color: $font-primary;
+			a {
+				color: $secondary;
+				text-decoration: none;
+			}
+		}
+		h2 {
+			background-color: $third-light;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: Montserrat;
+		}
+		.input-wrapper {
+			background-color: #fff;
+			//padding: 0px 7px;
+			width: 100%;
+			margin: 10px auto;
+			text-align: center;
+			padding: 3px 0;
+			md-input-container {
+				width: 80%;
+			}
+		}
+		
+		button {
+			transition-duration: 0.5s;
+			outline: none;
+			margin-bottom: 10px;
+			animation: buttonAnim 0.6s ease;
+			@keyframes buttonAnim 
+			{
+				0% {
+					transform: translateY(100%);
+				}
+			}
+			&:active {
+				transform: scale(1.05);
+			}
+		}
+		button.fb {
+			width: 80%;
+			height: 40px;
+			border : none;
+			margin-bottom: 10px;
+			font-size: 14px;
+			border-radius: 30px;
+			background-color: #3b5998;
+				i {
+					font-size: 25px;
+				}
+			}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			margin-top: 30px;
+			text-align: center;
+			button {
+				margin: 40px 0 20px 0;
+				width: 80%;
+				height: 40px;
+				border : none;
+				background-color: $secondary;
+				font-size: 14px;
+				border-radius: 30px;
+				font-weight: 600;
+			}
+			button[disabled] {
+				opacity: 0.8;
+			}
+		}
+	}
+}
+
+@media (max-width:768px) {
+.login-section {
+	.login-container {
+		width: 100%;
+		margin-top: 20px;
+	}
+}
+}

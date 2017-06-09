@@ -1,0 +1,110 @@
+@import '../../styles';
+
+.how-it-works {
+		-webkit-backface-visibility: hidden;
+		h1, h2, h3 {
+			font-family: Montserrat;
+		}
+		p {
+			font-size: 18px;
+			margin: 15px 0;
+			font-family: Cardo;
+			font-style: italic;
+		}
+		.layer {
+			top: 0;
+			z-index: -1;
+			position: absolute;
+			height: 100vh;
+			width: 100%;
+			background-attachment: fixed;
+		}
+		.step {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			background-size: 250%;
+			background-position: 100% 65%;
+		}
+		div.header-wrapper {
+			h1 {
+				font-size: 70px;
+				color: #000;
+				line-height: 55px;
+				padding: 10px;
+				display: block;
+				text-align: left;
+				text-transform: uppercase;
+			}
+		border-left : 14px solid #000;
+		border-bottom: none;
+		padding-left: 15px;
+		max-width: 400px;
+		//text-align: center;
+
+		}
+	.let-us-judge {
+		background-color: rgba(170, 255, 169, 0.9);
+		.layer {
+			background-image: url("../../assets/paper.png");
+			background-size: 100%;
+		}
+	}
+	.create-event {
+		background-color: rgba(255, 200, 154, 0.9);
+		.layer {
+			background-image: url("../../assets/paper.png");
+			background-size: 150%;
+		}
+	}
+	.create-account {
+		
+		background-image: linear-gradient(120deg, rgba(178, 53, 53, 0.9) calc(50% - 1px), $primary 50%);
+		animation: gradientSlide 1s ease-in-out forwards;
+		@keyframes gradientSlide {
+			0% {
+
+				background-position: 100% 65%;
+			}
+		 	100% {
+
+		 		background-position: 0% 65%;
+		 	}
+		}
+		.layer {
+			background-image: url("../../assets/paper.png");
+			background-size: 200%;
+
+		}
+	}
+}
+
+@media (max-width:768px) {
+	.how-it-works {
+		p {
+			text-align: center;
+		}
+		.create-account, .let-us-judge, .create-event {
+			.layer {
+				background-size: cover;
+				background-attachment: static;
+			}
+		}
+		.create-account {
+			background-size: 400%;
+		}
+		div.header-wrapper {
+			max-width: 230px;
+			border-left : 10px solid #000;
+			border-bottom: none;
+			padding: 0px;
+			h1 {
+				font-size: 40px;
+				line-height: 30px;
+			}
+		}
+	}
+}

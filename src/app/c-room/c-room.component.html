@@ -1,0 +1,58 @@
+<section class="create-room">
+	<article class="create-box card2"  >
+		<h2>Create an event</h2>
+		<div class="content card1">
+			<div class="step" (click)='tooltip.toggle()'><span class="card1">1</span><h3>Define the type of your room.</h3><i  #tooltip="mdTooltip" class="mdi mdi-help-circle" mdTooltip="Public room means everybody can access it, private rooms allow you to select users you would like to participate in event. Private rooms are not yet available"></i></div>
+			<div class="room-type-choice card1">
+				<button mdTooltip="Public room" md-icon-button [ngClass] = '{"highlighted":typeRoomSelected==="public"}' (click) = 'typeRoomSelected = "public"' ><md-icon class='mdi mdi-lock-open'></md-icon></button>
+				<button mdTooltip="Private room" md-icon-button [disabled] = 'true' [ngClass] = '{"highlighted":typeRoomSelected==="private"}' (click) = 'typeRoomSelected = "private"'><md-icon class='mdi mdi-lock'></md-icon></button>
+			</div>
+			<div class="step" (click)='tooltip1.toggle()'><span class="card1">2</span><h3>Type a statement you want to start a bet with.</h3><i #tooltip1="mdTooltip" class="mdi mdi-help-circle" mdTooltip="The statement should contain a sentence that will be possible to judge in the future by out team. e.g 'Borussia Dortmund will win champions league' "></i></div>
+
+			<div class="statement card1">
+				<md-input-container>
+      				<input mdInput placeholder="Enter a statment" type="text" class="form-control" required name='statement' [(ngModel)]="statementContent" #statement = "ngModel">
+	      				<md-hint *ngIf="statement.errors && (statement.dirty || statement.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(statement.dirty || statement.touched) && !statement.focused && statement.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+			<div class="step" (click)='tooltip2.toggle()'><span class="card1">3</span><h3>Pick the time the participating option will close.</h3>
+			<i #tooltip2="mdTooltip" class="mdi mdi-help-circle" mdTooltip="After this date, users cannot enter the bet
+or will not be able to enter the bet."></i></div>
+			<div class="ui-g-12 ui-md-4 end-time-event card1">
+       		 	<p-calendar dateFormat='dd/mm/yy' readonlyInput='true' placeholder='Event close time' [showIcon]="true" [(ngModel)]="eventCloseTime" [showTime]="true"></p-calendar>
+    		</div>
+    		<div class="step" (click)='tooltip3.toggle()'><span class="card1">4</span><h3>Specify when the event ends.</h3>
+    		<i #tooltip3="mdTooltip"class="mdi mdi-help-circle" mdTooltip="When bet time passess, our team will judge the event"></i></div>
+    		<div class="ui-g-12 ui-md-4 end-time-event card1">
+       		 	<p-calendar dateFormat='dd/mm/yy' readonlyInput='true' placeholder='Event end time' [showIcon]="true" [(ngModel)]="eventEndTime" [showTime]="true"></p-calendar>
+    		</div>
+			
+    		<div class="step" (click)='tooltip4.toggle()'><span class="card1">5</span><h3>Choose the amount of credits participants will be betting with</h3><i class="mdi mdi-help-circle" #tooltip4="mdTooltip" mdTooltip="Every user will bet with the same amout of points."></i></div>
+    		<div class="bet-points card1">
+      				<md-slider
+
+        [min]="10"
+        [max]="1000"
+        [step]="10"
+        color = 'accent'
+        [thumb-label]="true" [(ngModel)] = 'amountPoints'>
+    </md-slider>{{amountPoints}}
+    		
+    		</div>
+    		<div class="step" *ngIf='!userName'><span class="card1">+</span><h3>We noticed that you still don't have a username, let me fix that!</h3></div>
+    		<div class="statement card1" *ngIf='!userName'>
+				<md-input-container>
+      				<input mdInput placeholder="Enter username" type="text" class="form-control" required name='username' [(ngModel)]="userNameEvent" #username = "ngModel">
+	      				<md-hint *ngIf="username.errors && (username.dirty || username.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(username.dirty || username.touched) && !username.focused && username.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+    		<p class="after-message" *ngIf = 'submitAfterMessage'>{{submitAfterMessage.message}}</p>
+		</div>
+
+		<div class="actionBar">
+		<button md-raised-button [disabled] = 'submitBlock || !amountPoints || !statementContent || !eventEndTime || !eventCloseTime' (click) = 'submitEvent()'>Create room!</button>
+		</div>
+	</article>
+</section>

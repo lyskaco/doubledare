@@ -1,0 +1,31 @@
+<section class="login-section">
+	<article class="login-container card1">
+		<h2>Login</h2>
+		<form #loginForm="ngForm">
+			<div class="input-wrapper card1">
+				<md-input-container class="example-full-width">
+      				<input mdInput placeholder="Email or username" type="email" class="form-control" required name='email' [(ngModel)]="formLogin.email" #email = "ngModel">
+	      				<md-hint *ngIf="email.errors && (email.dirty || email.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(email.dirty || email.touched) && !email.focus
+	      				&& email.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+			<div class="input-wrapper card1">
+				<md-input-container class="example-full-width" >
+      				<input  mdInput  placeholder="Password" name='password'  type="password" class="form-control" required [(ngModel)] = "formLogin.password" #password = 'ngModel'>
+      				<md-hint *ngIf="password.errors && (password.dirty || password.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+      				<md-hint class='success' *ngIf="(password.dirty || password.touched) && !password.focused && password.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+			<p *ngIf='loginResponse' class="message">{{loginResponse.message}}</p>
+			<div *ngIf='iAmThinking' class="thinkingSpinner"><md-spinner></md-spinner></div>
+			 <button type="submit" class="btn card2" (click) = 'login();loginForm.reset()'
+             [disabled]="!loginForm.form.valid">Submit</button>
+		</form>
+			<!-- <span>or</span><br> -->
+			<!-- <button class="btn card2 fb" (click) = 'fbLogin()'><i class="mdi mdi-facebook"></i></button> -->
+			<!-- <p>No account? Register <a routerLink="/register">here</a></p> -->
+	</article>
+	<div class="layer-image">	
+	</div>
+</section>

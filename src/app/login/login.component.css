@@ -1,0 +1,184 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0; }
+
+::-webkit-scrollbar {
+  background-color: #E4FDE4; }
+
+::-webkit-scrollbar-button {
+  /* 2 */ }
+
+::-webkit-scrollbar-track {
+  /* 3 */ }
+
+::-webkit-scrollbar-track-piece {
+  /* 4 */ }
+
+::-webkit-scrollbar-thumb {
+  background-color: #FFC89A; }
+
+::-webkit-scrollbar-corner {
+  /* 6 */ }
+
+md-dialog-container {
+  padding: 0 !important; }
+
+.btn {
+  border-radius: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 10px;
+  cursor: pointer;
+  transition-duration: 0.5s; }
+  .btn:hover {
+    opacity: 0.7; }
+
+.mat-tab-header {
+  border: none; }
+
+.mat-menu-content {
+  background-color: #FFC89A !important; }
+  .mat-menu-content .mat-menu-item {
+    font-family: Montserrat;
+    font-size: 12px;
+    color: #fff; }
+
+.card1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+.card2 {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+.mat-ink-bar {
+  background-color: #E4FDE4; }
+
+md-hint {
+  font-size: 10px;
+  color: #B23535;
+  padding: 0;
+  animation: hintAppear 0.5s ease; }
+  md-hint span {
+    font-size: 10px;
+    color: #B23535; }
+@keyframes hintAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50%); } }
+.mat-dialog-container {
+  max-width: 100% !important; }
+  .mat-dialog-container app-feedback-dialog form .mat-input-container {
+    width: 90%;
+    margin: 0 auto;
+    display: block; }
+
+md-hint.success {
+  font-size: 25px;
+  width: 100%;
+  text-align: right;
+  position: absolute;
+  top: 10px; }
+  md-hint.success i {
+    text-align: right;
+    color: #AAFFA9; }
+
+.login-section {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(90deg, rgba(170, 255, 169, 0.8), rgba(17, 255, 189, 0.9));
+  font-family: Montserrat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .login-section .layer-image {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../../assets/building.jpg");
+    background-size: 150%;
+    background-position: 45% 50%;
+    z-index: -1; }
+  .login-section .login-container {
+    width: 27vw;
+    background-color: #E4FDE4;
+    text-align: center;
+    animation: loginSlide 0.8s ease; }
+@keyframes loginSlide {
+  0% {
+    transform: translateY(-50%); } }
+    .login-section .login-container .thinkingSpinner md-spinner {
+      height: 40px;
+      width: 40px; }
+    .login-section .login-container span {
+      font-family: Cardo;
+      font-weight: 800;
+      color: #443D3D; }
+    .login-section .login-container p {
+      font-family: Cardo;
+      margin: 10px 0;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 16px;
+      color: #443D3D; }
+      .login-section .login-container p a {
+        color: #B23535;
+        text-decoration: none; }
+    .login-section .login-container h2 {
+      background-color: #FFC89A;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: Montserrat; }
+    .login-section .login-container .input-wrapper {
+      background-color: #fff;
+      width: 100%;
+      margin: 10px auto;
+      text-align: center;
+      padding: 3px 0; }
+      .login-section .login-container .input-wrapper md-input-container {
+        width: 80%; }
+    .login-section .login-container button {
+      transition-duration: 0.5s;
+      outline: none;
+      margin-bottom: 10px;
+      animation: buttonAnim 0.6s ease; }
+@keyframes buttonAnim {
+  0% {
+    transform: translateY(100%); } }
+      .login-section .login-container button:active {
+        transform: scale(1.05); }
+    .login-section .login-container button.fb {
+      width: 80%;
+      height: 40px;
+      border: none;
+      margin-bottom: 10px;
+      font-size: 14px;
+      border-radius: 30px;
+      background-color: #3b5998; }
+      .login-section .login-container button.fb i {
+        font-size: 25px; }
+    .login-section .login-container form {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 30px;
+      text-align: center; }
+      .login-section .login-container form button {
+        margin: 40px 0 20px 0;
+        width: 80%;
+        height: 40px;
+        border: none;
+        background-color: #B23535;
+        font-size: 14px;
+        border-radius: 30px;
+        font-weight: 600; }
+      .login-section .login-container form button[disabled] {
+        opacity: 0.8; }
+
+@media (max-width: 768px) {
+  .login-section .login-container {
+    width: 100%;
+    margin-top: 20px; } }
+
+/*# sourceMappingURL=login.component.css.map */

@@ -1,0 +1,195 @@
+<section class="dashboard" (swipeleft)='swipeRouter("create-event")'>
+	<div class="user-account card2">
+		<h2>account</h2>
+		<div class="userInfo" *ngIf='user'>
+			<div class="picture card1">
+				<img *ngIf='!user.picture' src="./assets/user.png"  alt="">
+				<img *ngIf='user.picture' [src]="user.picture" alt="">
+				<input type="file" id='imageUpload' name="imageUpload" (change) = 'fileChange($event)'>
+				<label for="imageUpload" class="card1"><i class="mdi mdi-camera"></i></label>
+			</div>
+			<div *ngIf = 'fileUploadSpinner' class="uploadSpinner">
+				<md-spinner></md-spinner>
+			</div>
+			<h3>{{user.firstName}} {{user.lastName}}</h3>
+			<p>username: {{user.userName}}</p>
+			<p>{{user.email}}</p>
+			
+		</div>
+		<div class="feedback-bar card1">
+			<span>Leave us some feedback</span>
+			<button md-icon-button class="card2" (click)='openFeedbackDialog()'><md-icon class='mdi mdi-email'></md-icon></button>
+		</div>
+		<div class="actionBar card1">
+			<div class="points">Credits: <span *ngIf ='user'>{{user.points}}</span></div>
+			<button md-icon-button class="card2" (click)='openUserNameDialog()'>
+				<md-icon>
+					<i class="mdi mdi-account" ></i>
+				</md-icon>
+			</button>
+		</div>
+		<div *ngIf = '!user' class="loadingTime">
+			<md-spinner></md-spinner>
+		</div>		
+	</div>
+	<div class="latest-bets card2">
+		<h2>Events</h2>
+		<div class="content" *ngIf='allEvents'>
+			<div class="no-content" *ngIf='allEvents.length === 0'> No events</div>
+			<div class="event-item" *ngFor ='let event of allEvents | orderByDate | onlyOpenPipe:"open" | eventsFilterPipe:toggleChoiceFilter ; let i = index'>
+
+				<button class='link' [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+				<div class="wrapper card1" [ngClass]='{"vip":event.VIP==="1"}' *ngIf='i < 10' >
+				
+				<div class="host-image card1">
+					<img [src]='event.pictureHost' alt="Host photo">
+
+				</div>
+				<div class="column pack">
+					<h3>Host: {{event.userName}} <!-- <i class="mdi mdi-star" mdTooltip='Moderator' *ngIf='event.VIP==="1"'></i> --></h3>
+					<p>Statement: {{event.statement}}</p>
+				</div>
+				<div class="fukn-star" mdTooltip='Moderator' *ngIf='event.VIP==="1"'>
+					<i class="mdi mdi-bookmark-check"></i>
+				</div>
+				<div class="column status">
+					<p *ngIf='event.status === "pending"'>OPEN</p>
+					<p *ngIf='event.status === "closed"'>CLOSED</p>
+					<p *ngIf='event.status === "Waiting_For_Confirmation"'>JUDGING</p>
+					<p *ngIf='event.status === "finished"'>DONE</p>
+					<p *ngIf='event.status === "rejected"'>REJECTED</p>
+				</div>
+				<!-- <div class="informational-icons">
+					<i class="mdi mdi-account" mdTooltip="{{event.participantsNumber}}"></i>
+					<i class="mdi mdi-thumb-up" mdTooltip="{{event.participantsNumber}}"></i>
+					<i class="mdi mdi-thumb-down" mdTooltip="{{event.participantsNumber}}"></i>
+				</div> -->
+				<div class="column">
+					<p class="credit">BID: {{event.roomPoint}}</p>
+					<p class="credit">TOTAL: {{event.allPoints}}</p>
+					<p>Ends : {{event.endTime | date}}</p>
+				</div>
+				<!-- <div class="column link">
+					<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+				</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="actionBar card1">
+			<div class="option-buttons">
+				<button [ngClass] = '{"highlighted":toggleChoiceFilter === "all"}' (click) = 'toggleChoiceFilter = "all"' md-raised-button class="card1">ALL</button>
+				<button [ngClass] = '{"highlighted":toggleChoiceFilter === "popular"}' (click) = 'toggleChoiceFilter = "popular"' md-raised-button class="card1">POPULAR</button>
+				<button [ngClass] = '{"highlighted":toggleChoiceFilter === "highest"}' (click) = 'toggleChoiceFilter = "highest"' md-raised-button class="card1">HIGHEST BETS</button>
+				<button [ngClass] = '{"highlighted":toggleChoiceFilter === "crewpick"}' (click) = 'toggleChoiceFilter = "crewpick"' md-raised-button class="card1">CREW <i class="mdi mdi-star"></i></button>
+			</div>
+			
+			<button routerLink="/event-general" md-raised-button class="card2" mdTooltip="Events dashboard">
+				<md-icon>
+					<i class="mdi mdi-flag-variant"></i>
+				</md-icon>
+			</button>
+			<button routerLink="/create-event" md-icon-button class="card2" mdTooltip="Create an event!">
+				<md-icon>
+					<i class="mdi mdi-fire"></i>
+				</md-icon>
+			</button>
+		</div>
+		<!-- <div *ngIf = '!user' class="loadingTime">
+			<md-spinner></md-spinner>
+		</div> -->
+		<div *ngIf = '!allEvents' class="loadingTime">
+			<md-spinner></md-spinner>
+		</div>		
+	</div>
+	<div class="your-bets card2">
+		<h2>Your events</h2>
+		<div class="content uC" *ngIf = 'yourBetsToggle === "userCreated" && allEventsUserCreated'>
+			<div class="no-content" *ngIf='allEventsUserCreated.length === 0'> No events</div>
+			<div class="event-item" *ngFor ='let event of allEventsUserCreated | orderByDate'>
+
+				<button class='link' [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+				<div class="wrapper card1">
+					<div class="column pack">
+						<p>Statement: {{event.statement}}</p>
+					</div>
+					<div class="column status">
+						<p *ngIf='event.status === "pending"'>OPEN</p>
+						<p *ngIf='event.status === "closed"'>CLOSED</p>
+						<p *ngIf='event.status === "Waiting_For_Confirmation"'>JUDGE</p>
+						<p *ngIf='event.status === "finished"'>FINISHED</p>
+						<p *ngIf='event.status === "rejected"'>REJECTED</p>
+					</div>
+					<div class="column">
+						<p>Participants : {{event.participantsNumber}}</p>
+						<p>Positive: {{event.participantsNumberPositive}}</p>
+						<p>Negative: {{event.participantsNumberNegative}}</p>
+					</div>
+					
+					<div class="column">
+						<p class="credit">BID: {{event.roomPoint}}</p>
+						<p class="credit">TOTAL: {{event.allPoints}}</p>
+						<p>Ends : {{event.endTime | date}}</p>
+					</div>
+
+					<!-- <div class="column">
+						<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+					
+					
+					</div> -->
+				</div>
+			</div>
+			
+		</div>
+		<div class="content mB" *ngIf = 'yourBetsToggle === "userParticipates" && allEventsUserParticipates'>
+			<div class="no-content" *ngIf='allEventsUserParticipates.length === 0'> No events</div>
+			<div class="event-item" *ngFor ='let event of allEventsUserParticipates | orderByDate'>
+				<button class='link' [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon>
+				</button>
+				<div class="wrapper card1">
+				
+				<div class="host-image card1">
+					<img [src]='event.pictureHost' alt="Host photo">
+
+				</div>
+				<div class="column pack">
+					<h3 *ngIf = 'event.userName'>Host: {{event.userName}}</h3>
+					<h3 *ngIf = '!event.userName'>Host: {{event.firstName}}</h3>
+					<p>Statement: {{event.statement}}</p>
+				</div>
+				<div class="column">
+					<p class="credit">{{event.roomPoint}} CREDITS</p>
+					<p>Ends : {{event.endTime | date}}</p>
+					<p class="status">
+						<span *ngIf='event.status === "pending"' >OPEN</span>
+						<span *ngIf='event.status === "closed"' >CLOSED</span>
+						<span *ngIf='event.status === "Waiting_For_Confirmation"' >JUDGE</span>
+						<span *ngIf='event.status === "finished" '>FINISHED:
+					    <i *ngIf='event.winSide==="0"' class="mdi mdi-thumb-down"></i>
+						<i *ngIf='event.winSide==="1"' class="mdi mdi-thumb-up"></i>
+						</span>
+						<span *ngIf='event.status === "rejected"'>REJECTED</span>
+					</p>
+				</div>
+
+				<!-- <div class="column">
+					<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+				
+				</div> -->
+			</div>
+		</div>
+			
+		</div>
+			<div *ngIf = '!allEventsUserCreated' class="loadingTime">
+				<md-spinner></md-spinner>
+			</div>	
+		<div class="actionBar card1">
+		
+			<div class="option-buttons">
+				<button [ngClass] = '{"highlighted":yourBetsToggle === "userCreated"}' (click) = 'yourBetsToggle = "userCreated"' md-raised-button class="card1">MY EVENTS</button>
+				<button [ngClass] = '{"highlighted":yourBetsToggle === "userParticipates"}' (click) = 'yourBetsToggle = "userParticipates"' md-raised-button class="card1">MY BETS</button>
+			</div>
+		</div>
+	</div>
+
+	
+</section>

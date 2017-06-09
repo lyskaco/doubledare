@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BettingApp</title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,600|Montserrat:300,900,900i|Cardo:300,400,400i,600" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css
+">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/calendar.css" />
+  <link rel="stylesheet" type="text/css" href="assets/primeng.min.css" />
+  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href="styles.fca4b68eff39871d5357.bundle.css" rel="stylesheet"/></head>
+<style>
+
+
+.cs-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+  background-image: linear-gradient(120deg, #AAFFA9, #E4FDE4);
+  
+}
+app-root:empty + .cs-loader {
+	display: block;
+}
+app-root:empty + .cs-loader {
+	display: block;
+	
+}
+.cs-loader-inner {
+  transform: translateY(-50%);
+  top: 50%;
+  position: absolute;
+  width: calc(100% - 200px);
+  color: #B23535;
+  padding: 0 100px;
+  text-align: center;
+  
+}
+
+.cs-loader-inner label {
+  font-size: 20px;
+  opacity: 0;
+  display:inline-block;
+}
+
+@keyframes lol {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+
+@-webkit-keyframes lol {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+  }
+}
+
+.cs-loader-inner label:nth-child(6) {
+  -webkit-animation: lol 3s infinite ease-in-out;
+  animation: lol 3s infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(5) {
+  -webkit-animation: lol 3s 100ms infinite ease-in-out;
+  animation: lol 3s 100ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(4) {
+  -webkit-animation: lol 3s 200ms infinite ease-in-out;
+  animation: lol 3s 200ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(3) {
+  -webkit-animation: lol 3s 300ms infinite ease-in-out;
+  animation: lol 3s 300ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(2) {
+  -webkit-animation: lol 3s 400ms infinite ease-in-out;
+  animation: lol 3s 400ms infinite ease-in-out;
+}
+
+.cs-loader-inner label:nth-child(1) {
+  -webkit-animation: lol 3s 500ms infinite ease-in-out;
+  animation: lol 3s 500ms infinite ease-in-out;
+}
+</style>
+<body>
+  <app-root></app-root>
+  <div class="cs-loader">
+  <div class="cs-loader-inner">
+    <label>	●</label>
+    <label>	●</label>
+    <label>	●</label>
+    <label>	●</label>
+    <label>	●</label>
+    <label>	●</label>
+  </div>
+</div>
+<script type="text/javascript" src="inline.522c190bf799a791517b.bundle.js"></script><script type="text/javascript" src="polyfills.93529ef8097621c0dbd8.bundle.js"></script><script type="text/javascript" src="vendor.1ca5b942e4df6f2fbf63.bundle.js"></script><script type="text/javascript" src="main.82f80c47119f5737f0f4.bundle.js"></script></body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '264726613952867',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</html>

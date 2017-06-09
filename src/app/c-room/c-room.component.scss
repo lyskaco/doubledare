@@ -1,0 +1,192 @@
+@import '../../styles';
+
+h1, h2, h3, h4, h5 {
+	color: $font-primary;
+}
+.create-room {
+	box-sizing: border-box;
+	min-height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(90deg, #AAFFA9, #11FFBD);
+	font-family: Montserrat;
+	display : flex;
+	flex-direction : row;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 20px;
+	.create-box {
+		width: 600px;
+		min-height: 600px;
+		background-color: $third-light;
+		-moz-animation : boxAppear 0.5s ease;
+		-webkit-animation : boxAppear 0.5s ease;
+		animation : boxAppear 0.5s ease;
+		@keyframes boxAppear {
+			0% {
+				transform: translateY(50%);
+				opacity: 0;
+			}
+		}
+
+		h2 {
+			background-color: $third-light;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: Montserrat;
+		}
+
+		.step {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			span {
+				background-color: $secondary;
+				display: inline-block;
+				height: 30px;
+				width: 30px;
+				text-align: center;
+				line-height: 30px;
+				font-size: 14px;
+				color: #efefef;
+				margin: 0 10px;
+				font-weight: 800;
+				border-radius: 50%;
+			}
+			h3 {
+
+			text-align: center;
+			margin: 15px 0;
+			font-size: 12px;
+			font-weight: 400;
+			
+
+		}
+				i {
+					margin: 0 15px;
+					line-height: 40px;
+					color: $secondary;
+				}
+		}
+		.actionBar {
+			width: 100%;
+			display: flex;
+			height: 45px;
+			justify-content: center;
+			align-items: center;
+			background-color: $third-light;	
+			font-weight: 800;
+			color: $font-primary;
+			.mat-raised-button {
+				background-color: $third-light;
+				box-sizing: content-box;
+				color: $font-primary;	
+			}
+			button[disabled] {
+				  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+					opacity: 0.7;
+			}
+
+		}
+		.content {
+			.after-message {
+				text-align: center;
+				font-size: 16px;
+				font-family: Cardo;
+			}
+			.room-type-choice {
+				text-align: center;
+				margin: 15px 0;
+				padding: 15px 0;
+				background-color: $primary-light;
+				.mat-icon-button {
+					background-color: $secondary-light;
+					color: $primary-light;
+					transition: all 0.5s ease;
+					width: 50px;
+					height: 50px;
+					margin: 0 10px;
+					.mat-icon {
+						font-size: 24px;
+					}
+				}
+				.mat-icon-button.highlighted, .mat-raised-button.highlighted {
+					background-color: $secondary;
+					
+					transition-duration: 0.5s;
+					color: $primary-light;
+				}
+			}
+			.bet-points {
+				text-align: center;
+				background-color: $primary-light;
+				padding: 10px 0;
+				.mat-slider-horizontal {
+					width: 80%;
+				}
+			}
+			.statement {
+				background-color: $primary-light;
+				padding: 10px 0;
+				text-align: center;
+				md-input-container {
+					width: 90%;
+					margin: 0 auto;
+					.mat-input-wrapper {
+						margin: 0 auto;
+					}
+				}
+			}
+			.end-time-event {
+				background-color: $primary-light;
+				padding: 10px 0;
+				text-align: center;
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 758px) {
+	.create-room {
+		padding: 5px;
+		padding-bottom: 20px;
+		min-height: auto;
+		min-height: 100vh;
+		justify-content: flex-start;
+		align-items: flex-start;
+		.create-box {
+			background-color: $primary-light;
+			width: 100%;
+			min-height: auto;
+			padding: 0;
+			margin-bottom: 40px;
+			.content {
+				height: 80vh;
+				overflow-y: auto;
+				.statement {
+					padding: 0;
+			}
+				.room-type-choice {
+					margin: 0;
+				}
+			}
+
+			.step {
+				justify-content: center;
+				height: 40px;
+				span {
+					display: none;
+					
+				}
+				h3 {
+					margin: 0;
+					text-align: center;
+					
+				}
+
+			}
+		}
+	}
+}

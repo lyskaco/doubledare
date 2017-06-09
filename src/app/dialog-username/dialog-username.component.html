@@ -1,0 +1,12 @@
+<h1>Add/edit useraname</h1>
+<form #userNameForm="ngForm" novalidate>
+	<div class="input-wrapper card1">
+		<md-input-container>
+  			<input mdInput placeholder="Username" type="text" class="form-control" required name='userName' [(ngModel)]="username" #userName = "ngModel">
+      			<md-hint *ngIf="userName.errors && (userName.dirty || userName.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+      			<md-hint class='success' *ngIf="(userName.dirty || userName.touched) && !userName.focused && userName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+		</md-input-container>
+    </div>
+    <div class="message">{{message}}</div>
+    <button [disabled]='!username' (click)='updateUserName(userNameForm.value, userNameForm.valid)' md-raised-button >Update</button>
+</form>

@@ -1,0 +1,38 @@
+@import '../../styles';
+
+.feedback-dialog {
+	h1 {
+		background-color: $third-light;
+		text-align: center;
+		text-transform: uppercase;
+		font-family: Montserrat;
+		font-size: 18px;
+	}
+	h2 {
+		font-family: Montserrat;
+		font-size: 13px;
+		margin: 10px 0;
+	}
+	form {
+		.mat-radio-button {
+			margin: 0 10px !important;
+		}
+		.mat-radio-group {
+			text-align: center;
+		}
+		box-sizing: border-box;
+		padding: 20px;
+		md-option {
+			text-align: center;
+		}
+		textarea {
+				resize: none;
+			}
+		.mat-input-container {
+			display: block !important;
+			width: 100%;
+			margin: 40px auto;
+
+		}
+	}
+}

@@ -1,0 +1,29 @@
+<div class="feedback-dialog">
+	<h1>Leave us feedback</h1>
+	<form #feedbackForm="ngForm" novalidate>
+		<h2>Design:</h2>
+		<md-radio-group name='designFeedback' class="example-radio-group" [(ngModel)]="designFeedback">
+  			<md-radio-button class="example-radio-button" *ngFor="let grade of grades" [value]="grade">
+   				{{grade}}
+  			</md-radio-button>
+		</md-radio-group>
+		<h2>Functionality:</h2>
+		<md-radio-group name='functionalityFeedback' class="example-radio-group" [(ngModel)]="functionalityFeedback">
+  			<md-radio-button class="example-radio-button" *ngFor="let grade of grades" [value]="grade">
+   				{{grade}}
+  			</md-radio-button>
+		</md-radio-group>
+		<h2>Experience:</h2>
+		<md-radio-group name='experienceFeedback' class="example-radio-group" [(ngModel)]="experienceFeedback">
+  			<md-radio-button class="example-radio-button" *ngFor="let grade of grades" [value]="grade">
+   				{{grade}}
+  			</md-radio-button>
+		</md-radio-group>
+		<md-input-container>
+		<textarea name='suggestions' mdInput placeholder="Please, enter suggestions" type="text" class="form-control" required name='suggestions' [(ngModel)]="suggestions" #Suggestions = "ngModel"></textarea>
+			<!-- <md-hint *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+			<md-hint class='success' *ngIf="(firstName.dirty || firstName.touched) && !firstName.focused && firstName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint> -->
+    	</md-input-container>
+    	<button md-raised-button (click)='sendForm()'>SUBMIT</button>
+	</form>
+</div>

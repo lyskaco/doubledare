@@ -1,0 +1,59 @@
+<section class="register-section">
+	<article class="register-container card2">
+		<h2>Register</h2>
+		<form #registerForm="ngForm" >
+			<div class="input-wrapper card1 merged">
+				
+				<md-input-container>
+      				<input mdInput placeholder="First Name" type="text" class="form-control" required name='firstName' [(ngModel)]="formRegister.firstName" #firstName = "ngModel">
+	      				<md-hint *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(firstName.dirty || firstName.touched) && !firstName.focused && firstName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+    			<md-input-container>
+      				<input mdInput placeholder="Last Name" type="text" class="form-control" required name='lastName' [(ngModel)]="formRegister.lastName" #lastName = "ngModel">
+	      				<md-hint *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(lastName.dirty || lastName.touched) && !lastName.focused && lastName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+			<div class="input-wrapper card1">
+			<md-input-container>
+      				<input mdInput placeholder="Username" type="text" class="form-control" required name='userName' [(ngModel)]="formRegister.userName" #userName = "ngModel">
+	      				<md-hint *ngIf="userName.errors && (userName.dirty || userName.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(userName.dirty || userName.touched) && !userName.focused && userName.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+    			</div>
+			<div class="input-wrapper card1">
+				<md-input-container class="example-full-width">
+      				<input mdInput placeholder="Email" type="email" class="form-control" required name='email' [(ngModel)]="formRegister.email" #email = "ngModel">
+	      				<md-hint *ngIf="email.errors && (email.dirty || email.touched)" [ngStyle]="{'color': 'red'}">Field required!</md-hint>
+	      				<md-hint class='success' *ngIf="(email.dirty || email.touched) && !email.focused && email.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint>
+    			</md-input-container>
+			</div>
+			<div class="input-wrapper card1">
+				<md-input-container class="example-full-width" >
+      				<input  mdInput  minlength="6" placeholder="Password" name='password'  type="password" class="form-control" required [(ngModel)] = "formRegister.password" #password = 'ngModel'>
+      				<md-hint *ngIf="password.errors && (password.dirty || password.touched)"><span *ngIf="password.errors.required" [ngStyle]="{'color': 'red'}">Field required!</span><span [ngStyle]="{'color': 'red'}" *ngIf="password.errors.minlength" >Min. 6 chars!</span></md-hint>
+					
+      				<md-hint class='success' *ngIf="(password.dirty || password.touched) && !password.focused && password.valid" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint> 
+
+    			</md-input-container>
+			</div>
+			<div class="input-wrapper card1">
+				<md-input-container class="example-full-width" >
+      				<input  mdInput  placeholder="Repeat password" name='passRepeat'  type="password" class="form-control" required [(ngModel)] = 'passwordRepeat' #passRepeat = 'ngModel' >
+      				<md-hint *ngIf="(passRepeat.dirty || passRepeat.touched) && formRegister.password != passwordRepeat" [ngStyle]="{'color': 'red'}">Password not matching!</md-hint>
+      				<md-hint class='success' *ngIf="(passRepeat.dirty || passRepeat.touched) && !passRepeat.focused && formRegister.password == passwordRepeat" [ngStyle]="{'color': 'red'}"> <i class="mdi mdi-check"></i></md-hint> 
+    			</md-input-container>
+			</div>
+		     <p *ngIf='registerResponse' class="message">{{registerResponse.message}}</p>
+		     <div *ngIf='iAmThinking' class="thinkingSpinner"><md-spinner></md-spinner></div>
+			 <button type="submit" class="btn card1"
+             [disabled]="!registerForm.form.valid" [disabled] = '!formRegister.fName || formRegister.lName || formRegister.email || formRegister.password || formRegister.password != passwordRepeat' (click) = 'register();registerForm.reset()' >Submit</button>
+		</form>
+<!-- 			<span>or</span><br>
+			<button [disabled]='true' class="btn card1 fb" (click) = 'fbLogin()'><i class="mdi mdi-facebook"></i></button> -->
+			<p>Already have an account? Login <a routerLink="/login">here</a></p>
+	</article>
+	<div class="layer-image">	
+	</div>
+</section>

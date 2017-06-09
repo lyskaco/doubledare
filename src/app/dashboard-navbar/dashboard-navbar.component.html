@@ -1,0 +1,9 @@
+<nav class="dashboard card2" *ngIf='notAllowedRoutes.indexOf(currentRoutePath) < 0'>
+	<ul>
+		<li [ngClass]='{"highlighted":currentRoutePath==="/dashboard"}' (click) = "sideBarState = 'inactive'" routerLink="dashboard"><i class="mdi mdi-home"></i></li>
+		<li [ngClass]='{"highlighted":currentRoutePath==="/create-event"}' (click) = "sideBarState = 'inactive'" routerLink="create-event"><i class="mdi mdi-fire"></i></li>
+		<li [ngClass]='{"highlighted":currentRoutePath==="/event-general"}' (click) = "sideBarState = 'inactive'" routerLink="event-general"><i class="mdi mdi-flag"></i></li>
+		<li (click) = "sideBarState = 'inactive'" routerLink="/login"><i class="mdi mdi-coins"></i></li>
+		<li (click) = "logout()"><i class="mdi mdi-logout"></i></li>
+	</ul>
+</nav>

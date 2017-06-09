@@ -1,0 +1,187 @@
+<section class="events-general" >
+
+	<article class="card1" >
+		<h1>EVENT DASHBOARD</h1>
+		<md-tab-group class='tab card1'>
+  			<md-tab label="Events" >
+  			<div class="events">
+  				<nav>
+  					<button [ngClass] = '{"highlighted":toggleChoiceFilter === "all"}' (click) = 'toggleChoiceFilter = "all"' [mdMenuTriggerFor]="statusMenu" md-raised-button class="card1"><span *ngIf='toggleChoiceStatus!=="Waiting_For_Confirmation"'>{{toggleChoiceStatus | uppercase}}</span><span *ngIf='toggleChoiceStatus==="Waiting_For_Confirmation"'>JUDGING</span><i class="mdi mdi-chevron-down"></i></button>
+					<button [ngClass] = '{"highlighted":toggleChoiceFilter === "popular"}' (click) = 'toggleChoiceFilter = "popular"' md-raised-button class="card1">POPULAR</button>
+					<button [ngClass] = '{"highlighted":toggleChoiceFilter === "highest"}' (click) = 'toggleChoiceFilter = "highest"' md-raised-button class="card1">HIGHEST BETS</button>
+					<button class="bordered" [ngClass] = '{"highlighted":toggleChoiceFilter === "crewpick", "bordered":true}' (click) = 'toggleChoiceFilter = "crewpick"' md-raised-button class="card1">CREW <i class="mdi mdi-star"></i></button>
+					<md-menu #statusMenu="mdMenu">
+  						<button md-menu-item (click)='toggleChoiceStatus = "open"'>OPEN </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "all"'>ALL </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "closed"'>CLOSED </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "finished"'>FINISHED</button>
+  						<!-- <button md-menu-item (click)='toggleChoiceStatus = "rejected"'>REJECTED</button> -->
+  						<button md-menu-item (click)='toggleChoiceStatus = "Waiting_For_Confirmation"'>JUDGING</button>
+					</md-menu>
+  				</nav>
+  				<div *ngIf = '!allEvents' class="loadingTime">
+					<md-spinner></md-spinner>
+				</div>	
+  				<div class="content" *ngIf='allEvents'>
+  					<div class="no-content" *ngIf='allEvents.length === 0'> No events</div>
+					<div class="event-item" *ngFor ='let event of allEvents | orderByDate | onlyOpenPipe:toggleChoiceStatus  | eventsFilterPipe:toggleChoiceFilter' >
+					
+						<div class="wrapper card1" [ngClass]='{"vip": event.VIP==="1"}'>
+							<div class="moderator-buttons card1" *ngIf='isModeratorVar && event.status!=="finished"'>
+								<button md-icon-button (click)='deleteEvent(event)'><md-icon class='mdi mdi-delete'></md-icon></button>
+							</div>
+							<div class="host-image card1">
+								<img [src]='event.pictureHost' alt="Host photo">
+
+							</div>
+							<div class="fukn-star" mdTooltip='Moderator' *ngIf='event.VIP==="1"'>
+								<i class="mdi mdi-bookmark-check"></i>
+							</div>
+							<div class="column pack">
+								<p>Statement: {{event.statement}}</p>
+								<h3>Host: {{event.userName}} <!-- <i *ngIf='event.VIP==="1"' mdTooltip='Moderator' class="mdi mdi-star"></i> --></h3>
+								
+							</div>
+					
+							<div class="column card2 credit">
+							    <h3>BID:</h3>
+								<p class="">{{event.roomPoint}} CREDITS</p>
+							</div>
+							<div class="column card2 credit">
+							    <h3>TOTAL:</h3>
+								<p class="">{{event.allPoints}} CREDITS</p>
+							</div>
+							<div class="column tal">
+								<p>Ends : {{event.endTime | date}}</p>
+								<p>Close : {{event.endBetTime | date}}</p>
+								<p>Status: <span *ngIf='event.status === "pending"'>OPEN</span>
+								<span *ngIf='event.status === "Waiting_For_Confirmation"'>JUDGING</span>
+								<span *ngIf='event.status === "closed"'>CLOSED</span>
+								<!-- <span *ngIf='event.status === "rejected"'>REJECTED</span> -->
+								<span *ngIf='event.status === "finished"'>FINISHED</span></p>
+							</div>
+							<!-- <div class="column tal">
+								<p>Participants: {{event.participantsNumber}}</p>
+								<p>Positive: {{event.participantsNumberPositive}}</p>
+								<p>Negative: {{event.participantsNumberPositive}}</p>
+							</div> -->
+							<div class="column link">
+								<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+  			</md-tab>
+  			<md-tab label="My Events">
+  				<div class="events y-c card2">
+						<nav>
+		  					<button [ngClass] = '{"highlighted":yourBetsToggle === "userCreated"}' (click) = 'yourBetsToggle = "userCreated"' md-raised-button class="card1">MY EVENTS</button>
+							<button [ngClass] = '{"highlighted":yourBetsToggle === "userParticipates"}' (click) = 'yourBetsToggle = "userParticipates"' md-raised-button class="card1">MY BETS</button>
+
+					<!-- <md-menu #statusMenu="mdMenu">
+  						<button md-menu-item (click)='toggleChoiceStatus = "open"'>OPEN </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "all"'>ALL </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "closed"'>CLOSED </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "finished"'>FINISHED </button>
+  						<button md-menu-item (click)='toggleChoiceStatus = "Waiting_For_Confirmation"'>JUDGING</button>
+					</md-menu> -->
+  						</nav>
+		<div class="content" *ngIf = 'yourBetsToggle === "userCreated" && allEventsUserCreated'>
+			<div class="no-content" *ngIf='allEventsUserCreated.length === 0'>No events</div>
+			<div class="event-item" *ngFor ='let event of allEventsUserCreated | orderByDate'>
+				<div class="wrapper card1">
+					<div class="host-image card1">
+						<img [src]='event.pictureHost' alt="Host photo">
+
+					</div>
+					<div class="column pack">
+						<p>Statement: {{event.statement}}</p>
+					</div>
+					<div class="column edata">
+						<p>Participants : {{event.participantsNumber}}</p>
+						<p>Positive: {{event.participantsNumberPositive}}</p>
+						<p>Negative: {{event.participantsNumberNegative}}</p>
+					</div>
+					<div class="column card2 credit">
+						<h3>BID:</h3>
+						<p class="">{{event.roomPoint}} CREDITS</p>
+					</div>
+					<div class="column card2 credit">
+						<h3>TOTAL BID:</h3>
+						<p class="">{{event.allPoints}} CREDITS</p>
+					</div>
+					<div class="column tal">
+						<p>Ends : {{event.endTime | date}}</p>
+						<p>Close : {{event.endBetTime | date}}</p>
+						<p>Status: <span *ngIf='event.status === "pending"'>OPEN</span>
+						<span *ngIf='event.status === "Waiting_For_Confirmation"'>JUDGING</span>
+						<span *ngIf='event.status === "closed"'>CLOSED</span>
+						<span *ngIf='event.status === "rejected"'>REJECTED</span>
+						<span *ngIf='event.status === "finished"'>FINISHED</span></p>
+					</div>
+
+					<div class="column link">
+						<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+					
+					
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="content mB" *ngIf = 'yourBetsToggle === "userParticipates" && allEventsUserParticipates'>
+			<div class="no-content" *ngIf='allEventsUserParticipates.length === 0'>No events</div>
+			<div class="event-item" *ngFor ='let event of allEventsUserParticipates | orderByDate'>
+				<div class="wrapper card1">
+				
+				<div class="host-image card1">
+						<img [src]='event.pictureHost' alt="Host photo">
+
+					</div>
+					<div class="column pack">
+						<p>Statement: {{event.statement}}</p>
+					    <h3>Host: {{event.userName}}</h3>
+						
+					</div>
+					<div class="column edata">
+						<p>Participants : {{event.participantsNumber}}</p>
+						<p>Positive: {{event.participantsNumberPositive}}</p>
+						<p>Negative: {{event.participantsNumberNegative}}</p>
+					</div>
+					<div class="column card2 credit">
+						<h3>BID:</h3>
+						<p class="">{{event.roomPoint}} CREDITS</p>
+					</div>
+					<div class="column card2 credit">
+						<h3>TOTAL BID:</h3>
+						<p class="">{{event.allPoints}} CREDITS</p>
+					</div>
+					<div class="column tal">
+						<p>Ends : {{event.endTime | date}}</p>
+						<p>Close : {{event.endBetTime | date}}</p>
+						<p>Status: <span *ngIf='event.status === "pending"'>OPEN</span>
+						<span *ngIf='event.status === "Waiting_For_Confirmation"'>JUDGING</span>
+						<span *ngIf='event.status === "closed"'>CLOSED</span>
+						<span *ngIf='event.status === "rejected"'>REJECTED</span>
+						<span *ngIf='event.status === "finished"'>FINISHED</span></p>
+					</div>
+
+					<div class="column link">
+						<button  [routerLink]="['/room', event.token]" md-icon-button><md-icon class='mdi mdi-chevron-right'></md-icon></button>
+					
+					
+					</div>
+			</div>
+		</div>
+			
+		</div>
+			<div *ngIf = '!allEventsUserCreated' class="loadingTime">
+				<md-spinner></md-spinner>
+			</div>	
+	</div>
+  			</md-tab>
+		</md-tab-group>
+	</article>
+</section>

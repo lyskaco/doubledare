@@ -1,0 +1,474 @@
+@import '../../styles';
+
+.dashboard {
+	box-sizing: border-box;
+	height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(120deg, #AAFFA9, #11FFBD);
+	font-family: Montserrat;
+	display : flex;
+	flex-direction : row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	padding: 20px;
+	.your-bets {
+		margin-left: 35px;
+		width: 400px;
+		height: 400px;
+		background-color: $primary-light;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: space-between;
+		h2 {
+			background-color: $third-light;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: Montserrat;
+		}
+		.content {
+
+
+
+		}
+		.actionBar {
+			width: 100%;
+			display: flex;
+			height: 45px;
+			justify-content: space-between;
+			align-items: center;
+			background-color: $third-light;	
+			font-weight: 800;
+			color: $font-primary;
+			.mat-icon-button {
+				background-color: $secondary;
+				padding: 10px;
+				box-sizing: content-box;
+				font-size: 25px;
+				margin-left: -10px;
+				color: $primary-light;
+				}	
+
+
+			
+			
+		}
+	}
+	.latest-bets {
+		flex-grow: 2;
+	}
+	.latest-bets, .your-bets {
+		margin-left: 35px;
+		width: 450px;
+		height: 400px;
+
+		background-color: $third-light;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: space-between;
+		.loadingTime {
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			.mat-spinner {
+				margin: 0 auto;
+				
+			}
+		}
+		h2 {
+			background-color: $third-light;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: Montserrat;
+		}
+		.content.mB {
+			.event-item {
+				.wrapper {
+
+				}
+			}
+		}
+		.content.uC {
+			.event-item {
+				.wrapper {
+					height: 90px;
+					.column.pack {
+						margin-left: 10px;
+						width: 130px;
+					}
+				}
+			}
+		}
+		.content {
+			overflow-y: auto;
+			overflow-x: hidden;
+			height: 80%;
+			.no-content {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				font-size: 50px;
+				color: $primary-light;
+				font-weight: 900;
+				font-family: Montserrat;
+				opacity: 0.4;
+				width: 170px;
+			}
+			.event-item {
+				position: relative;
+				 &:hover {
+				 		.wrapper {
+					 		transform: translateX(10%);
+					 	}
+					 	.link {
+					 		opacity: 1;
+					 		transform: translate(-5%, -50%);
+					 	}
+					 }
+				.link {
+					position: absolute;
+					left: 1%;
+					top: 50%;
+					transform: translateY(-50%);
+					z-index: 0;
+					opacity: 0;
+					transition-duration: 1s;
+					font-size: 20px;
+				}
+				.wrapper.vip {
+					//border-top: 7px solid $primary;
+					//background-color: $primary;
+				}
+				.wrapper {
+					
+					z-index: 2;
+					position: relative;
+					margin: 5px 0;
+					height: 60px;
+					display: flex;
+					align-items: center;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					 background-color: #FFF;
+					 transition-duration: 0.5s;
+					 position: relative;
+				.fukn-star {
+					position: absolute;
+					left: 60px;
+					top: -10px;
+					z-index: 0;
+					i {
+						font-size: 31px;
+						color: $secondary;
+					}
+				}	
+				.column.pack {
+					width: 200px;
+					h3 {
+						i {
+							font-weight: 300;
+							font-size: 13px;
+							color: $secondary;
+						}
+					}
+					p {
+						font-size: 10px;
+						text-align: left;
+						
+					}
+				}
+				.informational-icons {
+					display: flex;
+					justify-content: center;
+					flex-wrap: wrap;
+					width: 50px;
+					i {
+						font-size: 13px;
+						margin: 0 2px;
+					}
+				}
+				.column.status {
+					width: auto;
+					transform: rotate(-90deg);
+
+					p {
+						font-weight: 800;
+						padding: 2px 3px;
+					}
+				}
+				// .column.link {
+				// 	position: absolute;
+				// 	left: 5px;
+				// 	top: 50%;
+				// }
+				.column {
+					margin: 0 5px;
+					
+					h3 {
+						font-size: 12px;
+					}
+					p {
+						font-size: 10px;
+						text-align: center;
+
+						
+					}
+					p.status {
+						font-size: Montserrat;
+						font-weight: 900;
+						
+					}
+					p.credit {
+						background-color: $secondary-light;
+						color: #efefef;
+						border-radius: 4px;
+						padding: 2px;
+						margin-bottom: 3px;
+					}
+
+				}
+
+				.host-image {
+					margin: 0px 8px;
+					height: 50px;
+					width: 50px;
+					border-radius: 50%;
+					img {
+						height: inherit;
+						width: inherit;
+						border-radius: 50%;
+						object-fit: cover;
+					}
+
+				}
+				}
+				
+			}
+
+
+		}
+		.actionBar {
+			width: 100%;
+			display: flex;
+			max-height: 30px;
+			justify-content: space-between;
+			align-items: center;
+			background-color: $third-light;	
+			font-weight: 800;
+			color: $font-primary;
+
+			.mat-raised-button {
+				font-size: 12px;
+				background-color: $third-light;
+				border-radius: none;
+				color: $secondary;
+				i {
+					font-size: 16px;
+				}
+			}
+			.mat-raised-button.highlighted {
+				color: #fff;
+			}
+			.mat-icon-button {
+				background-color: $secondary;
+				padding: 10px;
+				box-sizing: content-box;
+				font-size: 25px;
+				margin-right: -10px;
+				color: $primary-light;
+				z-index: 5;
+				
+			}
+			.mat-raised-button.card2 {
+				font-size: 22px;
+				line-height: 45px;
+				height: auto;
+				font-size: 26px;
+				i {
+					font-size: 22px;
+				}
+			}
+			.mat-icon {
+				height: auto;
+				width: auto;
+				font-size: 22px;
+			}
+		}
+	}
+	.user-account {
+		width: 250px;
+		height: 400px;
+		background-color: $primary-light;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: space-between;
+		.feedback-bar {
+			text-align: center;
+			margin-bottom: -10px;
+			z-index: 0;
+			background-color: rgba(255, 200, 154, 0.8);
+			animation: slideLeft 1s ease;
+			@keyframes slideLeft {
+				0% {
+					opacity: 0;
+				}
+			}
+			span {
+				font-size: 12px;
+				font-weight: 900;
+				font-family: Montserrat;
+				color: $font-primary;
+			}
+			.mat-icon-button {
+				color:  $font-primary;
+				height: 27px;
+				width: 27px;
+				line-height: 27px;
+				text-align: center;
+				font-size: 16px;
+			}
+		}
+		.actionBar {
+			width: 100%;
+			display: flex;
+			height: 45px;
+			justify-content: space-between;
+			align-items: center;
+			background-color: $third-light;	
+			font-weight: 800;
+			color: $font-primary;
+			.points{
+				margin-left: 10px;
+				span {
+
+					font-weight: 400;
+			}
+			}
+			
+			.mat-icon-button {
+				background-color: $third-light;
+				padding: 10px;
+				box-sizing: content-box;
+				font-size: 25px;
+				margin-right: -15px;
+				margin-top: -2px;
+			}
+		}
+		h2 {
+			background-color: $third-light;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: Montserrat;
+		}
+		.loadingTime {
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			.mat-spinner {
+				margin: 0 auto;
+				
+			}
+		}
+		.userInfo {
+			text-align: center;
+			position: relative;
+
+			
+			.uploadSpinner {
+				md-spinner {
+					margin: 0 auto;
+					width: 24px; 
+ 					height: 24px; 
+				}
+			}
+			h3 {
+					color: $font-primary;
+
+				}
+			p {
+				margin: 10px 0;
+			}
+			.picture {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				margin: 20px auto;
+				#imageUpload {
+					width: 0.1px;
+					height: 0.1px;
+					opacity: 0;
+					overflow: hidden;
+					position: absolute;
+					z-index: -1;
+				}
+				label[for='imageUpload'] {
+					background-color: $third-light;
+					color: $font-primary;
+					position: absolute;
+					top: 30%;
+					right: 5%;
+					width: 50px;
+					height: 50px;
+					line-height: 50px;
+					font-size: 25px;
+					cursor: pointer;
+					border-radius: 50%;
+				}
+				img {
+					width: inherit;
+					height: inherit;
+					text-align: center;
+					object-fit: cover;
+					border-radius: 50%;
+
+				}
+				
+			}
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	.dashboard {
+		.your-bets {
+			margin: 0;
+			margin-top: 30px;
+
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.dashboard {
+		padding: 5px;
+		padding-bottom: 100px;
+		.user-account {
+			width: 100%;
+			height: 80vh;
+			.userInfo {
+				.picture {
+					width: 200px;
+					height: 200px;
+					}
+				}
+			.actionBar {
+				.mat-icon-button {
+					margin: 0;
+				}
+			}
+		}
+		.latest-bets, .your-bets {
+			display: none;
+		}
+	}
+}
